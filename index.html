@@ -1,102 +1,70 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>D&M Kod Satış Portalı - Admin</title>
-<style>
-body {font-family:'Segoe UI',sans-serif;margin:0;background: linear-gradient(135deg,#ffe6f0,#ffcce0,#ffb3d1);color:#333;overflow-x:hidden;animation:bgAnim 20s infinite alternate;}
-@keyframes bgAnim {0%{background:linear-gradient(135deg,#ffe6f0,#ffcce0,#ffb3d1);}50%{background:linear-gradient(135deg,#ffccd9,#ff99b3,#ffb3d1);}100%{background:linear-gradient(135deg,#ffe6f0,#ffcce0,#ffb3d1);}}
-header {background: linear-gradient(90deg,#ff99cc,#ff66b3);padding:30px;text-align:center;font-size:2.7em;font-weight:bold;letter-spacing:2px;box-shadow:0 4px 15px rgba(0,0,0,0.15);color:#fff;}
-#welcome {text-align:center;font-size:3em;font-weight:bold;margin:20px 0;color:#fff;animation:fadeIn 2s;}
-@keyframes fadeIn {0%{opacity:0;transform:translateY(-20px);}100%{opacity:1;transform:translateY(0);}}
-.slider-container {display:flex;overflow-x:auto;scroll-behavior:smooth;padding:20px;gap:20px;justify-content:center;}
-.slider-container::-webkit-scrollbar {display:none;}
-.product {background:#ffe6f0;padding:20px;border-radius:20px;text-align:center;width:220px;flex:0 0 auto;transition:transform 0.5s,box-shadow 0.5s;position:relative;overflow:hidden;color:#333;display:flex;flex-direction:column;align-items:center;}
-.product:hover {transform:scale(1.08);box-shadow:0 20px 35px rgba(0,0,0,0.2);}
-.product h3{margin:10px 0;font-size:1.2em;}
-.product button {align-self:center;background:linear-gradient(90deg,#ff66b3,#ff3399);border:none;padding:12px 20px;margin-top:15px;border-radius:12px;cursor:pointer;font-weight:bold;transition:0.4s;color:#fff;box-shadow:0 4px 15px rgba(0,0,0,0.2);animation:glow 2s infinite alternate;width:90%;}
-.product button:hover {transform:scale(1.05);background:linear-gradient(90deg,#ff3399,#ff0066);}
-@keyframes glow {0%{box-shadow:0 0 8px rgba(255,0,102,0.3);}100%{box-shadow:0 0 25px rgba(255,51,153,0.6);}}
-#cart{position:fixed;top:20px;right:20px;background:linear-gradient(90deg,#ff66b3,#ff3399);padding:12px 20px;border-radius:15px;cursor:pointer;font-weight:bold;box-shadow:0 4px 15px rgba(0,0,0,0.2);display:flex;align-items:center;z-index:100;color:#fff;}
-#cart span{background:#fff;color:#ff3399;border-radius:50%;padding:5px 10px;margin-left:10px;font-weight:bold;}
-#cart-items{position:fixed;top:70px;right:20px;background:#fff0f5;padding:20px;border-radius:15px;display:none;width:300px;max-height:450px;overflow-y:auto;box-shadow:0 10px 30px rgba(0,0,0,0.15);z-index:99;}
-#cart-items ul{list-style:none;padding:0;margin:0;}
-#cart-items li{margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;}
-#checkout{background:linear-gradient(90deg,#ff3399,#ff0066);width:100%;border-radius:12px;padding:10px;font-weight:bold;font-size:1em;color:#fff;}
-#added-notif{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#ff3399;color:#fff;padding:15px 25px;border-radius:15px;font-weight:bold;opacity:0;pointer-events:none;transition:opacity 0.5s,bottom 0.5s;z-index:200;}
-#popup{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);background:linear-gradient(135deg,#ff66b3,#ff3399);padding:30px;border-radius:20px;box-shadow:0 10px 25px rgba(0,0,0,0.2);color:#fff;font-size:1.2em;text-align:center;z-index:300;transition: transform 0.3s ease-in-out;}
-#admin-panel{position:fixed;top:100px;left:50%;transform:translateX(-50%);background:#ffe6f0;padding:20px;border-radius:15px;box-shadow:0 10px 25px rgba(0,0,0,0.2);display:none;z-index:500;width:300px;}
-#admin-panel h3{margin-top:0;text-align:center;color:#ff0066;}
-#admin-panel input, #admin-panel button{width:100%;padding:10px;margin:5px 0;border-radius:10px;border:1px solid #ff3399;}
-#admin-btn {position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#ff1aff;color:#fff;padding:20px 40px;font-size:1.5em;font-weight:bold;border:none;border-radius:25px;cursor:pointer;box-shadow:0 0 20px #ff4dff,0 0 40px #ff99ff;animation:neon 1.5s infinite alternate;z-index:400;}
-@keyframes neon {0%{box-shadow:0 0 15px #ff4dff,0 0 30px #ff99ff;}100%{box-shadow:0 0 25px #ff4dff,0 0 50px #ff99ff;}}
-</style>
-</head>
-<body>
-<header>D&M Kod Satış Portalı</header>
-<div id="welcome">HOŞGELDİNİZ</div>
-
-<div class="slider-container" id="products"></div>
-
-<div id="cart">🛒 Sepet <span id="cart-count">0</span></div>
-<div id="cart-items">
-<ul id="cart-list"></ul>
-<p id="total">Toplam: 0₺</p>
-<button id="checkout" onclick="checkout()">Satın Al</button>
+<!-- ÜRÜN: HESAP MAKİNESİ -->
+<div class="product" style="max-width:300px;margin:auto;padding:15px;border:2px solid #ff66cc;border-radius:12px;background:#ffe6f2;text-align:center;font-family:sans-serif;">
+  <h3 style="color:#ff3399;">HESAP MAKİNESİ</h3>
+  <input type="text" id="calc-screen" placeholder="0" readonly style="width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #ff3399;text-align:right;font-size:18px;">
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;">
+    <button onclick="press('7')">7</button>
+    <button onclick="press('8')">8</button>
+    <button onclick="press('9')">9</button>
+    <button onclick="press('/')">÷</button>
+    <button onclick="press('4')">4</button>
+    <button onclick="press('5')">5</button>
+    <button onclick="press('6')">6</button>
+    <button onclick="press('*')">×</button>
+    <button onclick="press('1')">1</button>
+    <button onclick="press('2')">2</button>
+    <button onclick="press('3')">3</button>
+    <button onclick="press('-')">-</button>
+    <button onclick="press('0')">0</button>
+    <button onclick="press('.')">.</button>
+    <button onclick="calculate()">=</button>
+    <button onclick="press('+')">+</button>
+    <button onclick="percent()">%</button>
+    <button onclick="clearScreen()" style="grid-column: span 3;background:#ff3399;color:#fff;">C</button>
+  </div>
+  <button onclick="addToCart('HESAP MAKİNESİ',200)" style="margin-top:10px;padding:10px 20px;background:#ff3399;color:#fff;border:none;border-radius:8px;">Sepete Ekle</button>
 </div>
 
-<div id="added-notif">Kod başarıyla sepete eklendi!</div>
-<div id="popup"></div>
-
-<!-- Görünür neon pembe admin butonu -->
-<button id="admin-btn" onclick="promptAdmin()">Admin Girişi</button>
-
-<div id="admin-panel">
-<h3>Admin Paneli</h3>
-<input type="text" id="new-name" placeholder="Ürün Adı">
-<input type="number" id="new-price" placeholder="Fiyat">
-<button onclick="addProduct()">Ürün Ekle / Güncelle</button>
-<button onclick="closeAdmin()">Kapat</button>
+<!-- ÜRÜN: BASİT OYUNLAR -->
+<div class="product" style="max-width:300px;margin:auto;padding:15px;border:2px solid #ff66cc;border-radius:12px;background:#ffe6f2;text-align:center;font-family:sans-serif;margin-top:20px;">
+  <h3 style="color:#ff3399;">BASİT OYUNLAR</h3>
+  <button onclick="rockPaperScissors()" style="margin:5px;padding:10px 20px;background:#ff99cc;color:#fff;border:none;border-radius:8px;">Taş-Kağıt-Makas</button>
+  <button onclick="guessNumber()" style="margin:5px;padding:10px 20px;background:#ff99cc;color:#fff;border:none;border-radius:8px;">Sayı Tahmin Oyunu</button>
+  <button onclick="addToCart('BASİT OYUNLAR',250)" style="margin-top:10px;padding:10px 20px;background:#ff3399;color:#fff;border:none;border-radius:8px;">Sepete Ekle</button>
 </div>
 
 <script>
-// Sepet
-let cart=[];
-function showNotif(){let n=document.getElementById('added-notif');n.style.opacity=1;n.style.bottom='50px';setTimeout(()=>{n.style.opacity=0;n.style.bottom='20px';},2000);}
-function showPopup(m){let p=document.getElementById('popup');p.innerText=m;p.style.transform='translate(-50%,-50%) scale(1)';setTimeout(()=>{p.style.transform='translate(-50%,-50%) scale(0)';},2500);}
-function addToCart(name,price){cart.push({name,price});updateCart();showNotif();}
-function updateCart(){let cl=document.getElementById('cart-list');cl.innerHTML='';let total=0;cart.forEach((item,i)=>{total+=item.price;cl.innerHTML+=`<li>${item.name} <button onclick="removeItem(${i})">❌</button></li>`;});document.getElementById('total').innerText='Toplam: '+total+'₺';document.getElementById('cart-count').innerText=cart.length;}
-function removeItem(i){cart.splice(i,1);updateCart();}
-function toggleCart(){let c=document.getElementById('cart-items');c.style.display=c.style.display==='none'?'block':'none';}
-document.getElementById('cart').addEventListener('click',toggleCart);
-function checkout(){if(cart.length===0){showPopup('Sepetiniz boş!');return;}let total=cart.reduce((s,it)=>s+it.price,0);showPopup(`Ödeme için IBAN: TR98000670100000022363236\nÖdenecek Tutar: ${total}₺`);cart=[];updateCart();}
+/* HESAP MAKİNESİ */
+let calcValue = "";
+function press(val){calcValue+=val;document.getElementById('calc-screen').value=calcValue;}
+function clearScreen(){calcValue="";document.getElementById('calc-screen').value=calcValue;}
+function calculate(){try{calcValue=eval(calcValue);document.getElementById('calc-screen').value=calcValue;}catch(e){document.getElementById('calc-screen').value="Hata";}}
+function percent(){try{calcValue=eval(calcValue)/100;document.getElementById('calc-screen').value=calcValue;}catch(e){document.getElementById('calc-screen').value="Hata";}}
 
-// Ürünler (fiyat boş)
-let products=[
-{name:"",price:0,desc:""},
-{name:"",price:0,desc:""},
-{name:"",price:0,desc:""}
-];
-
-function showProducts(){
-  let container=document.getElementById('products');container.innerHTML='';
-  products.forEach((p)=>{
-    let div=document.createElement('div');div.className='product';
-    div.innerHTML=`<div class="price-tag"></div>
-    <h3>${p.name}</h3>
-    <p>${p.desc}</p>
-    <button onclick="addToCart('${p.name}',${p.price})">Sepete Ekle</button>`;
-    container.appendChild(div);
-  });
+/* BASİT OYUNLAR */
+function rockPaperScissors(){
+  const choices=["Taş","Kağıt","Makas"];
+  const user = prompt("Taş, Kağıt veya Makas seçin:");
+  const comp = choices[Math.floor(Math.random()*3)];
+  alert(`Bilgisayar: ${comp}\nSen: ${user}\nSonuç: ${determineRPS(user,comp)}`);
 }
-showProducts();
-
-// Admin Paneli
-const adminPassword = "1234";
-function promptAdmin(){let p = prompt("Admin şifresini giriniz:");if(p===adminPassword){document.getElementById('admin-panel').style.display='block';}else{alert("Şifre yanlış!");}}
-function addProduct(){let name=document.getElementById('new-name').value;let price=parseInt(document.getElementById('new-price').value);if(!name||isNaN(price)){alert("Geçerli değer girin!");return;}let exist=products.find(p=>p.name===name);if(exist){exist.price=price;}else{products.push({name:name,price:price,desc:""});}showProducts();showNotif();}
-function closeAdmin(){document.getElementById('admin-panel').style.display='none';}
+function determineRPS(user,comp){
+  if(user===comp) return "Berabere";
+  if((user==="Taş"&&comp==="Makas")||(user==="Kağıt"&&comp==="Taş")||(user==="Makas"&&comp==="Kağıt")) return "Kazandınız!";
+  return "Kaybettiniz!";
+}
+function guessNumber(){
+  const number=Math.floor(Math.random()*10)+1;
+  const guess=parseInt(prompt("1-10 arasında bir sayı tahmin edin:"));
+  if(guess===number) alert(`Tebrikler! Doğru sayı ${number}`);
+  else alert(`Yanlış! Doğru sayı ${number}`);
+}
 </script>
-</body>
-</html>
+
+<style>
+button{
+  cursor:pointer;
+  transition:0.2s;
+}
+button:hover{background:#ff3399;}
+</style>
