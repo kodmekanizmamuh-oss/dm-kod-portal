@@ -63,11 +63,12 @@ function showAdminPanel(){
   addBtn.onclick=addProductPrompt;
   container.appendChild(addBtn);
 
-  // Varolan ürünleri gösterebiliriz
+  // Varolan ürünleri göster
   products.forEach(p=>{
     let div=document.createElement("div");
     div.className="product";
-    div.innerHTML=`<h3>${p.name}</h3><button onclick="addToCart('${p.name}',${p.price})">Sepete Ekle</button>`;
+    div.innerHTML=`<h3>${p.name}</h3><div>${p.code}</div><button onclick="addToCart('${p.name}',${p.price})">Sepete Ekle</button>
+                   <button onclick="editCode(${products.indexOf(p)})">Kodu Düzenle</button>`;
     container.appendChild(div);
   });
 }
@@ -86,9 +87,19 @@ function addProduct(name,price,code){
   let container=document.getElementById('product-container');
   let div=document.createElement("div");
   div.className="product";
-  div.innerHTML=`<h3>${name}</h3><div>${code}</div><button onclick="addToCart('${name}',${price})">Sepete Ekle</button>`;
+  div.innerHTML=`<h3>${name}</h3><div>${code}</div>
+                 <button onclick="addToCart('${name}',${price})">Sepete Ekle</button>
+                 <button onclick="editCode(${products.length})">Kodu Düzenle</button>`;
   container.appendChild(div);
   products.push({name,price,code});
+}
+
+function editCode(index){
+  let newCode=prompt("Yeni kodu girin:",products[index].code);
+  if(newCode!==null){
+    products[index].code=newCode;
+    showAdminPanel();
+  }
 }
 
 function addToCart(name,price){
