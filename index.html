@@ -9,30 +9,29 @@ body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(135deg, #ffe6f2, #ffccd9);
+  background: #1a1a1a; /* koyu arka plan */
+  color: #fff;
 }
 header {
-  background: linear-gradient(90deg, #ff4dd2, #ff1ab8);
+  background: linear-gradient(90deg, #33cc33, #ff33cc, #3399ff, #ff9933);
   color: #fff;
   padding: 25px;
   text-align: center;
-  font-size: 2.2em;
+  font-size: 2em;
   font-weight: bold;
-  box-shadow: 0 4px 20px rgba(255,51,153,0.5);
+  box-shadow: 0 4px 20px rgba(255,255,255,0.3);
 }
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   min-height: 70vh;
   text-align: center;
 }
 h1 {
-  color: #ff1ab8;
-  font-size: 3em;
+  font-size: 2.5em;
   margin-bottom: 25px;
-  text-shadow: 1px 1px 5px #ff99cc;
+  text-shadow: 1px 1px 8px #ff99cc;
 }
 button {
   cursor: pointer;
@@ -40,31 +39,32 @@ button {
   padding: 12px 18px;
   border: none;
   border-radius: 12px;
-  background: #ff99cc;
-  color: #fff;
-  margin: 8px;
   font-weight: bold;
+  margin: 8px;
   box-shadow: 0 0 15px #ff66cc;
 }
-button:hover {
-  background: #ff33aa;
-  transform: translateY(-3px);
-  box-shadow: 0 0 25px #ff3399, 0 0 50px #ff66cc;
+button.neon {
+  background: #33cc33;
+  color: #fff;
+  box-shadow: 0 0 15px #33ff33, 0 0 30px #33cc33;
+}
+button.neon:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px #33ff33, 0 0 50px #33cc33;
 }
 #cart {
   position: fixed;
   top: 20px;
   right: 20px;
-  background: #ff66cc;
+  background: #222;
   padding: 20px;
   border-radius: 15px;
   color: #fff;
   z-index: 1000;
-  box-shadow: 0 0 20px #ff3399, 0 0 30px #ff66cc;
+  box-shadow: 0 0 20px #33cc33, 0 0 30px #33ff33;
 }
 #cart h4 {
   margin: 0 0 10px 0;
-  font-size: 1.2em;
 }
 #cart p {
   margin: 5px 0;
@@ -78,27 +78,27 @@ button:hover {
   padding: 25px;
 }
 .product {
-  background: #ffd9e6;
-  border: 2px solid #ff66cc;
+  background: #2a2a2a;
+  border: 2px solid #33cc33;
   border-radius: 15px;
   padding: 20px;
   width: 320px;
   text-align: center;
   position: relative;
-  box-shadow: 0 0 20px #ff66cc;
+  box-shadow: 0 0 20px #33cc33;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 .product:hover {
   transform: translateY(-5px);
-  box-shadow: 0 0 30px #ff33aa, 0 0 50px #ff66cc;
+  box-shadow: 0 0 30px #33ff33, 0 0 50px #33cc33;
 }
 .product h3 {
-  color: #ff1ab8;
   margin-bottom: 15px;
   font-size: 1.5em;
+  color: #33ff33;
 }
 .product-code {
-  background: #fff0f5;
+  background: #111;
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 12px;
@@ -107,15 +107,17 @@ button:hover {
   word-wrap: break-word;
   max-height: 150px;
   overflow-y: auto;
-  border: 1px solid #ff99cc;
+  border: 1px solid #33cc33;
 }
 textarea, input {
   width: 100%;
   margin: 5px 0;
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid #ff3399;
+  border: 1px solid #33cc33;
   font-size: 1em;
+  background: #111;
+  color: #fff;
 }
 </style>
 </head>
@@ -125,14 +127,14 @@ textarea, input {
 
 <main>
 <h1>HOŞGELDİNİZ</h1>
-<button onclick="adminLogin()">Admin Girişi</button>
+<button class="neon" onclick="adminLogin()">Admin Girişi</button>
 </main>
 
 <div id="cart">
 <h4>🛒 Sepet</h4>
 <p id="cart-items">0</p>
 <p id="cart-total">Toplam: 0₺</p>
-<button onclick="checkout()">Satın Al</button>
+<button class="neon" onclick="checkout()">Satın Al</button>
 </div>
 
 <div class="container" id="product-container" style="display:none;">
@@ -157,6 +159,7 @@ function showAdminPanel(){
   container.innerHTML = "";
 
   let addBtn = document.createElement("button");
+  addBtn.className="neon";
   addBtn.innerText = "Yeni Ürün Ekle";
   addBtn.onclick = addProductPrompt;
   container.appendChild(addBtn);
@@ -166,8 +169,8 @@ function showAdminPanel(){
     div.className="product";
     div.innerHTML = `<h3>${p.name}</h3>
                      <div class="product-code">${p.code}</div>
-                     <button onclick="addToCart('${p.name}',${p.price})">Sepete Ekle</button>
-                     <button onclick="editCode(${index})">Kodu Düzenle</button>`;
+                     <button class="neon" onclick="addToCart('${p.name}',${p.price})">Sepete Ekle</button>
+                     <button class="neon" onclick="editCode(${index})">Kodu Düzenle</button>`;
     container.appendChild(div);
   });
 }
@@ -188,8 +191,8 @@ function addProduct(name,price,code){
   div.className="product";
   div.innerHTML=`<h3>${name}</h3>
                  <div class="product-code">${code}</div>
-                 <button onclick="addToCart('${name}',${price})">Sepete Ekle</button>
-                 <button onclick="editCode(${products.length})">Kodu Düzenle</button>`;
+                 <button class="neon" onclick="addToCart('${name}',${price})">Sepete Ekle</button>
+                 <button class="neon" onclick="editCode(${products.length})">Kodu Düzenle</button>`;
   container.appendChild(div);
   products.push({name,price,code});
 }
