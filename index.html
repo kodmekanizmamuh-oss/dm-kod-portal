@@ -1,41 +1,75 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D&M Kod Satış Portalı</title>
+<style>
+body{font-family:sans-serif;margin:0;padding:0;background:#fff0f5;}
+header{background:linear-gradient(90deg,#ffb6c1,#ff69b4);color:#fff;padding:20px;text-align:center;font-size:2em;}
+.product-container{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;padding:20px;}
+.product{background:#ffe6f2;border:2px solid #ff66cc;border-radius:12px;padding:15px;width:300px;text-align:center;position:relative;}
+.product h3{color:#ff3399;}
+button{cursor:pointer;transition:0.2s;padding:10px 15px;border:none;border-radius:8px;background:#ff99cc;color:#fff;margin:5px;}
+button:hover{background:#ff3399;}
+#cart{position:fixed;top:20px;right:20px;background:#ff66cc;padding:15px;border-radius:12px;color:#fff;z-index:1000;}
+#cart h4{margin:0 0 10px 0;}
+input, select{margin:5px 0;}
+</style>
+</head>
+<body>
+
+<header>D&M Kod Satış Portalı - HOŞGELDİNİZ</header>
+
+<div id="cart">
+  <h4>🛒 Sepet</h4>
+  <p id="cart-items">0</p>
+  <p id="cart-total">Toplam: 0₺</p>
+  <button onclick="checkout()">Satın Al</button>
+</div>
+
+<div class="product-container">
+
 <!-- ÜRÜN: HESAP MAKİNESİ -->
-<div class="product" style="max-width:300px;margin:auto;padding:15px;border:2px solid #ff66cc;border-radius:12px;background:#ffe6f2;text-align:center;font-family:sans-serif;">
-  <h3 style="color:#ff3399;">HESAP MAKİNESİ</h3>
-  <input type="text" id="calc-screen" placeholder="0" readonly style="width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #ff3399;text-align:right;font-size:18px;">
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;">
-    <button onclick="press('7')">7</button>
-    <button onclick="press('8')">8</button>
-    <button onclick="press('9')">9</button>
-    <button onclick="press('/')">÷</button>
-    <button onclick="press('4')">4</button>
-    <button onclick="press('5')">5</button>
-    <button onclick="press('6')">6</button>
-    <button onclick="press('*')">×</button>
-    <button onclick="press('1')">1</button>
-    <button onclick="press('2')">2</button>
-    <button onclick="press('3')">3</button>
-    <button onclick="press('-')">-</button>
-    <button onclick="press('0')">0</button>
-    <button onclick="press('.')">.</button>
-    <button onclick="calculate()">=</button>
-    <button onclick="press('+')">+</button>
-    <button onclick="percent()">%</button>
-    <button onclick="clearScreen()" style="grid-column: span 3;background:#ff3399;color:#fff;">C</button>
-  </div>
-  <button onclick="addToCart('HESAP MAKİNESİ',200)" style="margin-top:10px;padding:10px 20px;background:#ff3399;color:#fff;border:none;border-radius:8px;">Sepete Ekle</button>
+<div class="product">
+<h3>HESAP MAKİNESİ</h3>
+<input type="text" id="calc-screen" placeholder="0" readonly style="width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #ff3399;text-align:right;font-size:18px;">
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;">
+<button onclick="press('7')">7</button>
+<button onclick="press('8')">8</button>
+<button onclick="press('9')">9</button>
+<button onclick="press('/')">÷</button>
+<button onclick="press('4')">4</button>
+<button onclick="press('5')">5</button>
+<button onclick="press('6')">6</button>
+<button onclick="press('*')">×</button>
+<button onclick="press('1')">1</button>
+<button onclick="press('2')">2</button>
+<button onclick="press('3')">3</button>
+<button onclick="press('-')">-</button>
+<button onclick="press('0')">0</button>
+<button onclick="press('.')">.</button>
+<button onclick="calculate()">=</button>
+<button onclick="press('+')">+</button>
+<button onclick="percent()">%</button>
+<button onclick="clearScreen()" style="grid-column: span 3;background:#ff3399;color:#fff;">C</button>
+</div>
+<button onclick="addToCart('HESAP MAKİNESİ',200)">Sepete Ekle</button>
 </div>
 
 <!-- ÜRÜN: BASİT OYUNLAR -->
-<div class="product" style="max-width:300px;margin:auto;padding:15px;border:2px solid #ff66cc;border-radius:12px;background:#ffe6f2;text-align:center;font-family:sans-serif;margin-top:20px;">
-  <h3 style="color:#ff3399;">BASİT OYUNLAR</h3>
-  <button onclick="rockPaperScissors()" style="margin:5px;padding:10px 20px;background:#ff99cc;color:#fff;border:none;border-radius:8px;">Taş-Kağıt-Makas</button>
-  <button onclick="guessNumber()" style="margin:5px;padding:10px 20px;background:#ff99cc;color:#fff;border:none;border-radius:8px;">Sayı Tahmin Oyunu</button>
-  <button onclick="addToCart('BASİT OYUNLAR',250)" style="margin-top:10px;padding:10px 20px;background:#ff3399;color:#fff;border:none;border-radius:8px;">Sepete Ekle</button>
+<div class="product">
+<h3>BASİT OYUNLAR</h3>
+<button onclick="rockPaperScissors()">Taş-Kağıt-Makas</button>
+<button onclick="guessNumber()">Sayı Tahmin Oyunu</button>
+<button onclick="addToCart('BASİT OYUNLAR',250)">Sepete Ekle</button>
+</div>
+
 </div>
 
 <script>
 /* HESAP MAKİNESİ */
-let calcValue = "";
+let calcValue="";
 function press(val){calcValue+=val;document.getElementById('calc-screen').value=calcValue;}
 function clearScreen(){calcValue="";document.getElementById('calc-screen').value=calcValue;}
 function calculate(){try{calcValue=eval(calcValue);document.getElementById('calc-screen').value=calcValue;}catch(e){document.getElementById('calc-screen').value="Hata";}}
@@ -44,8 +78,8 @@ function percent(){try{calcValue=eval(calcValue)/100;document.getElementById('ca
 /* BASİT OYUNLAR */
 function rockPaperScissors(){
   const choices=["Taş","Kağıt","Makas"];
-  const user = prompt("Taş, Kağıt veya Makas seçin:");
-  const comp = choices[Math.floor(Math.random()*3)];
+  const user=prompt("Taş, Kağıt veya Makas seçin:");
+  const comp=choices[Math.floor(Math.random()*3)];
   alert(`Bilgisayar: ${comp}\nSen: ${user}\nSonuç: ${determineRPS(user,comp)}`);
 }
 function determineRPS(user,comp){
@@ -59,12 +93,28 @@ function guessNumber(){
   if(guess===number) alert(`Tebrikler! Doğru sayı ${number}`);
   else alert(`Yanlış! Doğru sayı ${number}`);
 }
+
+/* SEPET */
+let cartCount=0;
+let cartTotal=0;
+function addToCart(name,price){
+  cartCount++;
+  cartTotal+=price;
+  document.getElementById('cart-items').innerText=cartCount;
+  document.getElementById('cart-total').innerText='Toplam: '+cartTotal+'₺';
+  alert(name+" kod başarıyla sepete eklendi!");
+}
+function checkout(){alert("Satın alma işlemi demo değildir, ödeme entegrasyonu eklenmelidir.");}
+
+/* ADMIN PANELİ (basit simülasyon) */
+function adminLogin(){
+  const password=prompt("Admin Şifrenizi Girin:");
+  if(password==="2332"){
+    alert("Admin girişi başarılı!");
+    document.getElementById('admin-panel').style.display="block";
+  } else alert("Şifre yanlış!");
+}
 </script>
 
-<style>
-button{
-  cursor:pointer;
-  transition:0.2s;
-}
-button:hover{background:#ff3399;}
-</style>
+</body>
+</html>
