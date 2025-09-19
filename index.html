@@ -5,32 +5,128 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>D&M Kod Satış Portalı</title>
 <style>
-body{margin:0;padding:0;font-family:sans-serif;background:#fff0f5;}
-header{background:linear-gradient(90deg,#ffcce6,#ff99cc);color:#fff;padding:25px;text-align:center;font-size:2.5em;box-shadow:0 5px 15px rgba(255,0,102,0.3);}
-h1{color:#ff3399;text-align:center;font-size:3em;margin:20px 0;}
-button{cursor:pointer;transition:0.3s;padding:12px 18px;border:none;border-radius:12px;background:#ff66cc;color:#fff;box-shadow:0 0 15px #ff33aa;animation:float 2s infinite;}
-button:hover{background:#ff3399;transform:translateY(-3px) scale(1.05);}
-@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
-#cart{position:fixed;top:20px;right:20px;background:#ff66cc;padding:20px;border-radius:15px;color:#fff;z-index:1000;box-shadow:0 0 20px #ff3399;}
-#cart h4{margin:0 0 10px 0;}
-#cart p{margin:5px 0;}
-.container{display:flex;flex-wrap:wrap;justify-content:center;gap:25px;padding:20px;}
-.product{background:#ffe6f2;border:2px solid #ff66cc;border-radius:15px;padding:15px;width:280px;text-align:center;position:relative;box-shadow:0 0 20px #ff66cc;transition:0.3s;}
-.product:hover{transform:scale(1.05);box-shadow:0 0 25px #ff3399;}
-.product h3{color:#ff3399;margin-bottom:10px;}
-.product-code{background:#fff0f5;padding:10px;border-radius:8px;overflow:auto;max-height:120px;margin-bottom:10px;}
-textarea{width:100%;height:150px;margin:5px 0;border-radius:8px;border:1px solid #ff3399;padding:5px;}
-input{width:100%;margin:5px 0;padding:10px;border-radius:8px;border:1px solid #ff3399;}
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #ffe6f2, #fff0f5);
+}
+header {
+  background: linear-gradient(90deg, #ffb6c1, #ff69b4);
+  color: #fff;
+  padding: 25px;
+  text-align: center;
+  font-size: 2.2em;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(255,51,153,0.4);
+}
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  text-align: center;
+}
+h1 {
+  color: #ff3399;
+  font-size: 3em;
+  margin-bottom: 25px;
+  text-shadow: 1px 1px 5px #ff99cc;
+}
+button {
+  cursor: pointer;
+  transition: 0.3s;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 12px;
+  background: #ff99cc;
+  color: #fff;
+  margin: 8px;
+  font-weight: bold;
+  box-shadow: 0 0 15px #ff66cc;
+}
+button:hover {
+  background: #ff3399;
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px #ff3399, 0 0 50px #ff66cc;
+}
+#cart {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #ff66cc;
+  padding: 20px;
+  border-radius: 15px;
+  color: #fff;
+  z-index: 1000;
+  box-shadow: 0 0 20px #ff3399, 0 0 30px #ff66cc;
+}
+#cart h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+}
+#cart p {
+  margin: 5px 0;
+  font-weight: bold;
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  padding: 25px;
+}
+.product {
+  background: #ffe6f2;
+  border: 2px solid #ff66cc;
+  border-radius: 15px;
+  padding: 20px;
+  width: 320px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 0 20px #ff66cc;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.product:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 30px #ff3399, 0 0 50px #ff66cc;
+}
+.product h3 {
+  color: #ff3399;
+  margin-bottom: 15px;
+  font-size: 1.5em;
+}
+.product-code {
+  background: #fff0f5;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 12px;
+  font-family: monospace;
+  font-size: 0.95em;
+  word-wrap: break-word;
+  max-height: 150px;
+  overflow-y: auto;
+  border: 1px solid #ff99cc;
+}
+textarea, input {
+  width: 100%;
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ff3399;
+  font-size: 1em;
+}
 </style>
 </head>
 <body>
 
 <header>D&M Kod Satış Portalı</header>
 
+<main>
 <h1>HOŞGELDİNİZ</h1>
-<div style="text-align:center;">
 <button onclick="adminLogin()">Admin Girişi</button>
-</div>
+</main>
 
 <div id="cart">
 <h4>🛒 Sepet</h4>
@@ -44,45 +140,45 @@ input{width:100%;margin:5px 0;padding:10px;border-radius:8px;border:1px solid #f
 </div>
 
 <script>
-let cartCount=0, cartTotal=0, IBAN="TR98000670100000022363236";
-let products=[];
+let cartCount = 0, cartTotal = 0, IBAN = "TR98000670100000022363236";
+let products = [];
 
 function adminLogin(){
-  const password=prompt("Admin Şifrenizi Girin:");
-  if(password==="2332"){
+  const password = prompt("Admin Şifrenizi Girin:");
+  if(password === "2332"){
     alert("Admin girişi başarılı!");
     showAdminPanel();
   } else alert("Şifre yanlış!");
 }
 
 function showAdminPanel(){
-  let container=document.getElementById('product-container');
-  container.style.display="flex";
-  container.innerHTML="";
+  let container = document.getElementById('product-container');
+  container.style.display = "flex";
+  container.innerHTML = "";
 
-  let addBtn=document.createElement("button");
-  addBtn.innerText="Yeni Ürün Ekle";
-  addBtn.onclick=addProductPrompt;
+  let addBtn = document.createElement("button");
+  addBtn.innerText = "Yeni Ürün Ekle";
+  addBtn.onclick = addProductPrompt;
   container.appendChild(addBtn);
 
   products.forEach((p,index)=>{
-    let div=document.createElement("div");
+    let div = document.createElement("div");
     div.className="product";
-    div.innerHTML=`<h3>${p.name}</h3>
-                   <div class="product-code">${p.code}</div>
-                   <button onclick="addToCart('${p.name}',${p.price})">Sepete Ekle</button>
-                   <button onclick="editCode(${index})">Kodu Düzenle</button>`;
+    div.innerHTML = `<h3>${p.name}</h3>
+                     <div class="product-code">${p.code}</div>
+                     <button onclick="addToCart('${p.name}',${p.price})">Sepete Ekle</button>
+                     <button onclick="editCode(${index})">Kodu Düzenle</button>`;
     container.appendChild(div);
   });
 }
 
 function addProductPrompt(){
-  let name=prompt("Ürün Adı:");
+  let name = prompt("Ürün Adı:");
   if(!name) return;
-  let price=parseInt(prompt("Fiyat (₺):"));
+  let price = parseInt(prompt("Fiyat (₺):"));
   if(isNaN(price)) return;
-  let code=prompt("Ürün Kodu (HTML/JS):");
-  if(!code) code="";
+  let code = prompt("Ürün Kodu (HTML/JS):");
+  if(!code) code = "";
   addProduct(name,price,code);
 }
 
