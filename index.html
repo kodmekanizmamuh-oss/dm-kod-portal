@@ -8,7 +8,7 @@
 body{font-family:sans-serif;margin:0;padding:0;background:#fff0f5;}
 header{background:linear-gradient(90deg,#ffb6c1,#ff69b4);color:#fff;padding:20px;text-align:center;font-size:2em;}
 main{display:flex;flex-direction:column;align-items:center;justify-content:center;height:70vh;text-align:center;}
-h1{color:#ff3399;font-size:3em;}
+h1{color:#ff3399;font-size:3em;margin-bottom:20px;}
 button{cursor:pointer;transition:0.3s;padding:10px 15px;border:none;border-radius:10px;background:#ff99cc;color:#fff;margin:5px;box-shadow:0 0 10px #ff66cc;}
 button:hover{background:#ff3399;transform:translateY(-2px);}
 #cart{position:fixed;top:20px;right:20px;background:#ff66cc;padding:15px;border-radius:12px;color:#fff;z-index:1000;box-shadow:0 0 15px #ff3399;}
@@ -17,7 +17,8 @@ button:hover{background:#ff3399;transform:translateY(-2px);}
 .container{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;padding:20px;}
 .product{background:#ffe6f2;border:2px solid #ff66cc;border-radius:12px;padding:15px;width:300px;text-align:center;position:relative;box-shadow:0 0 15px #ff66cc;}
 .product h3{color:#ff3399;}
-input, select{margin:5px 0;padding:8px;border-radius:5px;border:1px solid #ff3399;width:100%;}
+textarea{width:100%;height:150px;margin:5px 0;border-radius:5px;border:1px solid #ff3399;padding:5px;}
+input{width:100%;margin:5px 0;padding:8px;border-radius:5px;border:1px solid #ff3399;}
 </style>
 </head>
 <body>
@@ -56,10 +57,19 @@ function showAdminPanel(){
   let container=document.getElementById('product-container');
   container.style.display="flex";
   container.innerHTML="";
+
   let addBtn=document.createElement("button");
   addBtn.innerText="Yeni Ürün Ekle";
   addBtn.onclick=addProductPrompt;
   container.appendChild(addBtn);
+
+  // Varolan ürünleri gösterebiliriz
+  products.forEach(p=>{
+    let div=document.createElement("div");
+    div.className="product";
+    div.innerHTML=`<h3>${p.name}</h3><button onclick="addToCart('${p.name}',${p.price})">Sepete Ekle</button>`;
+    container.appendChild(div);
+  });
 }
 
 function addProductPrompt(){
@@ -67,16 +77,18 @@ function addProductPrompt(){
   if(!name) return;
   let price=parseInt(prompt("Fiyat (₺):"));
   if(isNaN(price)) return;
-  addProduct(name,price);
+  let code=prompt("Ürün Kodu (HTML/JS):");
+  if(!code) code="";
+  addProduct(name,price,code);
 }
 
-function addProduct(name,price){
+function addProduct(name,price,code){
   let container=document.getElementById('product-container');
   let div=document.createElement("div");
   div.className="product";
-  div.innerHTML=`<h3>${name}</h3><button onclick="addToCart('${name}',${price})">Sepete Ekle</button>`;
+  div.innerHTML=`<h3>${name}</h3><div>${code}</div><button onclick="addToCart('${name}',${price})">Sepete Ekle</button>`;
   container.appendChild(div);
-  products.push({name,price});
+  products.push({name,price,code});
 }
 
 function addToCart(name,price){
